@@ -1,0 +1,151 @@
+1)Running sum of 1D array
+class Solution {
+    public int[] runningSum(int[] nums) {
+        int[] runSum = new int[nums.length];
+
+        runSum[0] = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            runSum[i] = runSum[i - 1] + nums[i];
+        }
+
+        System.out.println(Arrays.toString(runSum));
+
+        return runSum;
+    }
+}
+
+2)Sum of all odd length subarrays
+class Solution {
+    public int sumOddLengthSubarrays(int[] arr) {
+        int sum=0;
+        int n=arr.length;
+        for(int i=0;i<arr.length;i++){
+            int left =i+1;
+            int right=n-i;
+            int k=left*right;
+            int odd=(k+1)/2;
+            sum=sum+odd*arr[i];
+        }
+        return sum;
+    }
+}
+
+3)Find the highest apttitude
+class Solution {
+    public int largestAltitude(int[] gain) {
+     int max=0;
+     int sum=0;
+     for(int i=0;i<gain.length;i++){
+       sum+=gain[i];
+       max=Math.max(max,sum);
+     }
+    return max;
+    }
+}
+
+4)Find the middle index in the array
+class Solution {
+       public int findMiddleIndex(int[] nums) {
+    if (nums == null || nums.length == 0) return -1;
+
+    int sum = 0; 
+    for (int i = 0; i < nums.length; i++) {
+        sum += nums[i]; 
+    }
+    
+    int prefix = 0, suffix = 0; 
+    for (int i = 0; i < nums.length; i++) {
+        suffix = sum - prefix;
+        prefix += nums[i]; 
+        if (prefix == suffix) return i;
+    }
+    return -1;        
+}
+}
+
+5)Find the pivot integer
+class Solution {
+    public int pivotInteger(int n) {
+     
+        long num = n*(n+1)/2L;
+
+        // Check if it is a whole number.
+        double x = Math.pow(num,0.5);
+        
+        // If it is not a whole number, for example, 1.2 , it gives 2 when we apply Math.ceil.
+        if(Math.ceil(x) - x == 0){
+            return (int)(x);
+        }else{
+            return -1;
+        }
+    }
+}
+
+7)Sum of absolute difference in a sorted array
+class Solution {
+    public int[] getSumAbsoluteDifferences(int[] nums) {
+        int res[] = new int[nums.length];
+        int c=0;
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            res[i] = (c*nums[i])-sum;
+            c+=1;
+            sum+=nums[i];
+        }
+        c=0;
+        sum=0;
+        for(int i=nums.length-1;i>=0;i--){
+            res[i]+=sum-(c*nums[i]);
+            c+=1;
+            sum+=nums[i];
+        }
+        return res;
+    }
+}
+
+8)Find the score of all prefixes of an array 
+class Solution {
+    public long[] findPrefixScore(int[] nums) {
+        int n=nums.length;
+        long[] ans=new long[n];
+        long max=Integer.MIN_VALUE;
+        
+        for(int i=0;i<n;i++){
+            max=Math.max(max>nums[i]?max:nums[i],max);
+            ans[i]=nums[i]+max;
+        }
+        
+        long sum=0;
+        for(int i=0;i<n;i++){
+            sum+=ans[i];
+            ans[i]=sum;
+        }
+        
+        return ans;
+        
+        
+        
+//         int n=nums.length;
+//         long conver[]=new long[n];
+        
+//         for(int i=0;i<nums.length;i++){
+//             conver[i] = nums[i];
+//             long max=0;
+//             for(int j=0;j<=i;j++){
+//                 if(nums[j]>max){
+//                     max=nums[j];
+//                 }
+                
+//             }
+//             conver[i]=conver[i]+max;
+//         }
+        
+//         for(int i=1;i<n;i++){
+//             conver[i]=conver[i]+conver[i-1];
+//         }
+//         return conver;
+        
+    }
+    
+}
